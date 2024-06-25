@@ -2,7 +2,7 @@ from .GS_utils import build_cnn, concatenate_views
 from keras import backend as K
 from keras.models import Sequential
 from keras.layers import Dense
-from keras.utils import np_utils
+from keras  import utils
 from keras.callbacks import ModelCheckpoint
 from gravityspy.utils import log
 from gwpy.table import EventTable
@@ -339,13 +339,13 @@ def make_model(data, batch_size=22, nb_epoch=10,
         testing_names = np.vstack(testingDF['gravityspy_id'].values)
 
     # Categorize labels
-    trainingset_labels = np_utils.to_categorical(
+    trainingset_labels = utils.to_categorical(
                                         trainingset_labels, nb_classes)
 
-    validation_labels = np_utils.to_categorical(
+    validation_labels = utils.to_categorical(
                                         validation_labels, nb_classes)
     if fraction_testing:
-        testing_labels = np_utils.to_categorical(
+        testing_labels = utils.to_categorical(
                                         testing_labels, nb_classes)
 
     logger.info('Concatenating multiple views ...')
