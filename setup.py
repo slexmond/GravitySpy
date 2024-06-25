@@ -71,7 +71,7 @@ install_requires = [
     'h5py >= 1.3',
     'Keras >= 2.3.1',
     'lscsoft-glue >= 1.59.3',
-    'mysqlclient >= 1.4.0',
+    'mysqlclient >= 1.4.0, < 2.2.0',
     'pandas >= 0.22',
     'panoptes-client >= 1.0.3',
     'psycopg2-binary >= 2.7.5',
@@ -81,7 +81,7 @@ install_requires = [
     'scipy >= 1.0.0',
     'sqlalchemy >= 1.2.12',
     'tables > 3.0.0',
-    'tensorflow-gpu>=2.0.0',
+#    'tensorflow-gpu>=2.0.0,<2.7.0',
 ]
 
 tests_require = [
