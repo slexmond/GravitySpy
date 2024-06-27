@@ -63,10 +63,13 @@ def classify(event_time, channel_name,
     # Extract Detector Name From Channel Name
     detector_name = channel_name.split(':')[0]
 
+    if not hasattr(event_time, "__len__"):
+        event_time = [event_time]
+
     # Parse Keyword Arguments
     config = kwargs.pop('config', utils.GravitySpyConfigFile())
     plot_directory = kwargs.pop('plot_directory', 'plots')
-    id_string = kwargs.pop('id_string', '{0:.9f}'.format(event_time))
+    id_string = kwargs.pop('id_string', ['{0:.9f}'.format(e) for e in event_time])
 
     # Parse Ini File
     plot_time_ranges = config.plot_time_ranges
@@ -75,16 +78,17 @@ def classify(event_time, channel_name,
 
     # Cropping the results before interpolation to save on time and memory
     # perform the q-transform
-    specsgrams, q_value = utils.make_q_scans(event_time=event_time,
-                                             channel_name=channel_name,
-                                             config=config,
-                                             **kwargs)
+    for ev_time, id_str in zip(event_time, id_string):
+        specsgrams, q_value = utils.make_q_scans(event_time=ev_time,
+                                                 channel_name=channel_name,
+                                                 config=config,
+                                                 **kwargs)
 
-    utils.save_q_scans(plot_directory, specsgrams,
-                       plot_normalized_energy_range, plot_time_ranges,
-                       detector_name, event_time, frange=frange,
-                       id_string=id_string,
-                       **kwargs)
+        utils.save_q_scans(plot_directory, specsgrams,
+                           plot_normalized_energy_range, plot_time_ranges,
+                           detector_name, ev_time, frange=frange,
+                           id_string=id_str,
+                           **kwargs)
 
     results = utils.label_q_scans(plot_directory=plot_directory,
                                   path_to_cnn=path_to_cnn,
