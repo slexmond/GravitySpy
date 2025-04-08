@@ -19,6 +19,7 @@ install_requires = [
     'scikit-image',   # for image processing
     'matplotlib',     # for plotting
     'numpy',          # general array manipulation
+    'lalsuite'        # for LIGO Analysis Library Suite
 ]
 
 # -- tests ----------------------------------------------------------
