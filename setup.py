@@ -65,7 +65,6 @@ setup_requires = [
 
 install_requires = [
     'configparser',
-    'dqsegdb >= 1.5.0',
     'gwpy >= 1.0.0',
     'gwtrigfind >= 0.7',
     'h5py >= 1.3',
